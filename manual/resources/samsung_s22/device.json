@@ -1,0 +1,9 @@
+{
+  "deviceName": "Samsung Galaxy S22",
+  "os": "Android",
+  "osVersion": "12",
+  "deviceScreenSize": "1080x2340",
+  "statusBarHeight": 79,
+  "navigationBarHeight": 225,
+  "orientation": "portrait"
+}
