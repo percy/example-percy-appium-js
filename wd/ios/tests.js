@@ -11,8 +11,8 @@ var asserters = wd.asserters;
 const desiredCaps = {
   // Set BStack options that would allow App Automate to run
   'bstack:options': {
-    userName: process.env.AA_USERNAME,
-    accessKey: process.env.AA_ACCESS_KEY
+    userName: process.env.BROWSERSTACK_USERNAME,
+    accessKey: process.env.BROWSERSTACK_ACCESS_KEY
   },
 
   // Percy Options (defaults)
@@ -20,17 +20,16 @@ const desiredCaps = {
     enabled: true,
     ignoreErrors: true
   },
-
   // Set URL of the application under test
-  app: process.env.APP,
+  app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'Google Pixel 6',
-  os_version: '12',
+  device: 'iPhone 12 Pro',
+  os_version: '16',
 
   // Set other BrowserStack capabilities
-  project: 'First Node App Percy Project',
-  build: 'App Percy wd Android',
+  project: 'POA App Percy',
+  build: 'App Percy wd iOS',
   name: 'first_visual_test'
 };
 
@@ -43,32 +42,32 @@ const driver = wd.promiseRemote('https://hub-cloud.browserstack.com/wd/hub');
 driver.init(desiredCaps)
   .then(function() {
     // wait for app to load
-    return new Promise((resolve) => setTimeout(resolve, 5000))
+    return new Promise((resolve) => setTimeout(resolve, 2000))
   })
   .then(function() {
     return percyScreenshot(driver, 'Home Screen');
   })
   .then(function () {
-    return driver.waitForElementByAccessibilityId('Search Wikipedia', asserters.isDisplayed && asserters.isEnabled, 30000);
+    return driver.waitForElementById('Text Button', asserters.isDisplayed && asserters.isEnabled, 30000);
   })
-  .then(function (searchElement) {
-    return searchElement.click();
-  })
-  .then(function () {
-    return driver.waitForElementById('org.wikipedia.alpha:id/search_src_text', asserters.isDisplayed && asserters.isEnabled, 30000);
-  })
-  .then(function (searchInput) {
-    // Change `BrowserStack` to other word to see the diff in next build
-    return searchInput.sendKeys("BrowserStack");
+  .then(function (textButton) {
+    return textButton.click();
   })
   .then(function () {
-    return driver.elementsByClassName('android.widget.TextView');   
+    return driver.waitForElementById('Text Input', asserters.isDisplayed && asserters.isEnabled, 30000);
+  })
+  .then(function (textInput) {
+    // Change hello@browserstack.com email to see diff in next build
+    return textInput.sendKeys("hello@browserstack.com"+"\n");
+  })
+  .then(function () {
+    return driver.waitForElementById('Text Output', asserters.isDisplayed && asserters.isEnabled, 30000);
   })
   .then(function () {
     return driver.hideKeyboard();   
   })
   .then(function() {
-    return percyScreenshot(driver, 'Search results');
+    return percyScreenshot(driver, 'Form page');
   })
   .fin(function() {
     // Invoke driver.quit() after the test is done to indicate that the test is completed.
