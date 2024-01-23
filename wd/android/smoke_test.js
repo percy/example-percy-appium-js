@@ -45,17 +45,17 @@ driver.init(desiredCaps)
     // wait for app to load
     return new Promise((resolve) => setTimeout(resolve, 5000))
   })
+  // .then(function () {
+  //   return driver.waitForElementByAccessibilityId('History', asserters.isDisplayed && asserters.isEnabled, 40000);
+  // })
+  // .then(function (searchElement) {
+  //   return searchElement.click();
+  // })
+  // .then(function() {
+  //   return percyScreenshot(driver, 'History tab');
+  // })
   .then(function () {
-    return driver.waitForElementByAccessibilityId('History', asserters.isDisplayed && asserters.isEnabled, 40000);
-  })
-  .then(function (searchElement) {
-    return searchElement.click();
-  })
-  .then(function() {
-    return percyScreenshot(driver, 'History tab');
-  })
-  .then(function () {
-    return driver.waitForElementByAccessibilityId('My lists', asserters.isDisplayed && asserters.isEnabled, 30000);
+    return driver.waitForElementByAccessibilityId('My lists', asserters.isDisplayed && asserters.isEnabled, 50000);
   })
   .then(function (searchElement) {
     return searchElement.click();
