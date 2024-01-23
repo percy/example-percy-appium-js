@@ -25,13 +25,13 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'Google Pixel 6',
-  os_version: '12',
+  device: 'Samsung Galaxy S21 Ultra',
+  os_version: '11',
 
   // Set other BrowserStack capabilities
   project: 'POA App Percy',
-  build: 'App Percy wd Android',
-  name: 'first_visual_test'
+  build: 'App Percy Smoke Test - Android',
+  name: 'Smoke test'
 };
 
 // Initialize the remote Webdriver using BrowserStack remote URL
