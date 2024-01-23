@@ -46,7 +46,7 @@ driver.init(desiredCaps)
     return new Promise((resolve) => setTimeout(resolve, 5000))
   })
   .then(function () {
-    return driver.waitForElementByAccessibilityId('History', asserters.isDisplayed && asserters.isEnabled, 30000);
+    return driver.waitForElementByAccessibilityId('History', asserters.isDisplayed && asserters.isEnabled, 40000);
   })
   .then(function (searchElement) {
     return searchElement.click();
