@@ -12,9 +12,9 @@ exports.config = {
     project: "First App Percy Project",
     build: 'App Percy Webdriverio iOS',
     name: 'first_visual_test',
-    device: 'iPhone 12 Pro',
-    os_version: "16",
-    app: process.env.APP || 'bs://<hashed app-id>'
+    device: 'iPhone 13',
+    os_version: "15",
+    app: process.env.APP_URL
   }],
 
   logLevel: 'info',

@@ -12,9 +12,9 @@ exports.config = {
     project: "First App Percy Project",
     build: 'App Percy Webdriverio Android',
     name: 'first_visual_test',
-    device: 'Google Pixel 6',
-    os_version: "12.0",
-    app: process.env.APP || 'bs://<hashed app-id>'
+    device: 'Samsung Galaxy S21',
+    os_version: "11.0",
+    app: process.env.APP_URL || 'bs://<hashed app-id>'
   }],
 
   logLevel: 'info',
