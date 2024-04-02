@@ -25,8 +25,8 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'Samsung Galaxy S21 Ultra',
-  os_version: '11',
+  device: 'Samsung Galaxy S22 Plus',
+  os_version: '12',
 
   // Set other BrowserStack capabilities
   project: 'POA App Percy',

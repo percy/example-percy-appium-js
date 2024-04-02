@@ -12,7 +12,7 @@ exports.config = {
     project: "First App Percy Project",
     build: 'App Percy Webdriverio Android',
     name: 'first_visual_test',
-    device: 'Samsung Galaxy S21',
+    device: 'Samsung Galaxy S21 Ultra',
     os_version: "11.0",
     app: process.env.APP_URL || 'bs://<hashed app-id>'
   }],
