@@ -25,8 +25,8 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'Samsung Galaxy S21 Ultra',
-  os_version: '11',
+  device: 'Google Pixel 8',
+  os_version: '14',
 
   // Set other BrowserStack capabilities
   project: 'POA App Percy',
@@ -36,7 +36,7 @@ const desiredCaps = {
 
 // Initialize the remote Webdriver using BrowserStack remote URL
 // and desired capabilities defined above
-const driver = wd.promiseRemote('https://hub-cloud.browserstack.com/wd/hub');
+const driver = wd.promiseRemote(process.env.HUB_URL);
 
 // Test case for the BrowserStack sample Android app.
 // If you have uploaded your app, update the test case here.
