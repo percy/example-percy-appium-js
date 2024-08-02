@@ -15,6 +15,8 @@ const desiredCaps = {
     accessKey: process.env.BROWSERSTACK_ACCESS_KEY
   },
 
+  // "browserstack.machine": "204.14.77.177:00008120-000871041E38C01E",
+
   // Percy Options (defaults)
   'percyOptions': {
     enabled: true,
@@ -24,7 +26,7 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'iPhone 14',
+  device: 'iPhone 14 Pro',
   os_version: '16',
 
   // Set other BrowserStack capabilities
@@ -35,7 +37,9 @@ const desiredCaps = {
 
 // Initialize the remote Webdriver using BrowserStack remote URL
 // and desired capabilities defined above
+console.log("Before driver initialisation", desiredCaps);
 const driver = wd.promiseRemote(process.env.HUB_URL);
+console.log("After driver initialisation", desiredCaps);
 
 // Test case for the BrowserStack sample Android app.
 // If you have uploaded your app, update the test case here.
