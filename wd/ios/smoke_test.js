@@ -26,7 +26,7 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'iPhone 14',
+  device: 'iPhone 14 Pro',
   os_version: '16',
 
   // Set other BrowserStack capabilities
