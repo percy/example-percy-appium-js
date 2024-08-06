@@ -25,8 +25,8 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'Google Pixel 8',
-  os_version: '14',
+  device: 'Google Pixel 6 Pro',
+  os_version: '13',
 
   // Set other BrowserStack capabilities
   project: 'POA App Percy',
