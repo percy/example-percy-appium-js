@@ -15,8 +15,6 @@ const desiredCaps = {
     accessKey: process.env.BROWSERSTACK_ACCESS_KEY
   },
 
-  // "browserstack.machine": "204.14.77.177:00008120-000871041E38C01E",
-
   // Percy Options (defaults)
   'percyOptions': {
     enabled: true,
