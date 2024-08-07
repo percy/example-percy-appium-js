@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@percy/appium-app": "^0.0.5",
+    "@percy/cli": "^1.29.1",
     "filereader": "^0.10.3"
   }
 }
