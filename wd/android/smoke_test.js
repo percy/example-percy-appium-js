@@ -18,7 +18,7 @@ const desiredCaps = {
   // Percy Options (defaults)
   'percyOptions': {
     enabled: true,
-    ignoreErrors: true
+    ignoreErrors: false
   },
 
   // Set URL of the application under test
