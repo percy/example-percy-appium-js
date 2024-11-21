@@ -24,8 +24,8 @@ const desiredCaps = {
   app: process.env.APP_URL,
 
   // Specify device and os_version for testing
-  device: 'iPhone 15',
-  os_version: '17',
+  device: 'iPhone 12 Pro',
+  os_version: '16',
 
   // Set other BrowserStack capabilities
   project: 'POA App Percy',
