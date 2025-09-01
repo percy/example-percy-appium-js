@@ -25,7 +25,7 @@ const desiredCaps = {
 
   // Specify device and os_version for testing
   device: 'iPhone 12 Pro',
-  os_version: '16',
+  os_version: '17',
 
   // Set other BrowserStack capabilities
   project: 'First Node App Percy Project',
