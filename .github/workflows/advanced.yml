@@ -1,0 +1,50 @@
+name: Advanced — App Percy
+
+# PER-8195 Phase 2 — advanced example for @percy/appium-app.
+# Triggers manually only (`workflow_dispatch`). App Percy CI requires a real
+# device session (BrowserStack App Automate hub); we don't run it on every PR
+# because forks and Dependabot don't have access to the hub secrets.
+on:
+  workflow_dispatch:
+    inputs:
+      driver:
+        description: 'Which driver to run (webdriverio or wd)'
+        required: true
+        default: 'webdriverio'
+        type: choice
+        options:
+          - webdriverio
+          - wd
+
+jobs:
+  advanced:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ${{ inputs.driver }}/advanced
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Sanity-check BrowserStack secrets
+        env:
+          AA_USERNAME: ${{ secrets.AA_USERNAME }}
+          AA_ACCESS_KEY: ${{ secrets.AA_ACCESS_KEY }}
+        run: |
+          if [ -z "$AA_USERNAME" ] || [ -z "$AA_ACCESS_KEY" ]; then
+            echo "::error::AA_USERNAME / AA_ACCESS_KEY repo secrets are required for the advanced App Percy job. Cannot run without a real device session."
+            exit 1
+          fi
+      - name: Install advanced/ dependencies
+        run: npm install
+      - name: Run wdio advanced tests against BrowserStack App Automate
+        env:
+          AA_USERNAME: ${{ secrets.AA_USERNAME }}
+          AA_ACCESS_KEY: ${{ secrets.AA_ACCESS_KEY }}
+          APP: ${{ secrets.APP_BS_URL }}
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_BRANCH: ${{ github.ref_name }}
+          PERCY_COMMIT: ${{ github.sha }}
+        run: npx --no-install percy app:exec -- npm run test:advanced

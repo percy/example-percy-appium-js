@@ -1,0 +1,11 @@
+# PER-8195 — global config for the @percy/appium-app advanced example.
+# Per-screenshot options in specs/advanced.test.js override these.
+
+version: 2
+
+# App Percy CLI defaults.
+percy:
+  defer_uploads: false
+
+# Note: snapshot-level keys (widths, percy-css, min-height) don't apply to
+# App Percy — screenshots are taken on-device, not from a serialized DOM.
