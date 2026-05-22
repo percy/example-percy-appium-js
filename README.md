@@ -1,16 +1,16 @@
 # example-percy-appium-js
 Example app used by the [Percy JS Appium tutorial](https://docs.percy.io/v2-app/docs/appium-for-javascript) and [Percy JS WebdriverIO tutorial](https://docs.percy.io/v2-app/docs/webdriverio-for-javascript) demonstrating App Percy's JS Appium and WebdriverIO integrations.
 
-> **New:** This repo ships an [`advanced/`](./webdriverio/advanced) example covering the full applicable App Percy SDK feature surface for `@percy/appium-app` via the webdriverio driver. See the [Percy SDK Feature Matrix](https://docs.percy.io/docs/sdk-feature-matrix) for cross-SDK coverage. A `wd/advanced/` symmetric example for the wd driver is planned.
+> **New:** This repo ships `advanced/` examples for both drivers covering the full applicable App Percy SDK feature surface for `@percy/appium-app`. See the [Percy SDK Feature Matrix](https://docs.percy.io/docs/sdk-feature-matrix) for cross-SDK coverage.
 
 ## Examples
 
 | Driver | Example | What it shows | Run command |
 |---|---|---|---|
 | webdriverio | `webdriverio/android/` (basic) | Minimum viable: one `percyScreenshot(name)` call per test. | `cd webdriverio && npm run android` |
-| webdriverio | [`webdriverio/advanced/`](./webdriverio/advanced) | Full applicable App Percy SDK feature surface: orientation, ignore/consider regions (xpath, appium element, custom bounding box), fullscreen + status/nav bar heights, build metadata via env, sync mode, test_case + labels. See [`webdriverio/advanced/README.md`](./webdriverio/advanced/README.md). | `cd webdriverio/advanced && npm install && npx percy app:exec -- npm run test:advanced` |
+| webdriverio | [`webdriverio/advanced/`](./webdriverio/advanced) | Full applicable App Percy SDK feature surface — wdio + mocha + 9 `it()` blocks per matrix row. See [`webdriverio/advanced/README.md`](./webdriverio/advanced/README.md). | `cd webdriverio/advanced && npm install && npx percy app:exec -- npm run test:advanced` |
 | wd | `wd/android.js` (basic) | Minimum viable: one `percyScreenshot(driver, name)` call per test. | `cd wd && node android.js` |
-| wd | `wd/advanced/` (planned) | Planned — same matrix-row coverage as `webdriverio/advanced/` using the `wd` driver. | — |
+| wd | [`wd/advanced/`](./wd/advanced) | Same matrix-row coverage as `webdriverio/advanced/` via a sequential `wd` promise-chain script (`advanced.js`). See [`wd/advanced/README.md`](./wd/advanced/README.md). | `cd wd/advanced && npm install && npx percy app:exec -- npm run test:advanced` |
 
 ## JS Appium Tutorial
 

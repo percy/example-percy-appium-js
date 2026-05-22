@@ -1,0 +1,7 @@
+# PER-8195 — global config for the @percy/appium-app (wd driver) advanced
+# example. Per-screenshot options in advanced.js override these.
+
+version: 2
+
+percy:
+  defer_uploads: false
