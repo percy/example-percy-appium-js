@@ -15,7 +15,7 @@ A single mocha spec (`specs/advanced.test.js`) where each `it(...)` block exerci
 - `consider_regions_xpaths`
 - `sync` mode
 - `test_case` + `labels` metadata
-- Build metadata via env (`PERCY_PROJECT` / `PERCY_BUILD` / `DEVICE` / `OS_VERSION` / `APP`)
+- Build metadata via env (`BROWSERSTACK_PROJECT_NAME` / `BROWSERSTACK_BUILD_NAME` / `DEVICE` / `OS_VERSION` / `APP`)
 - env-driven `PERCY_BRANCH` / `PERCY_COMMIT` override
 
 Web-only options (widths, percyCSS, minHeight, scope, discovery, domTransformation, responsiveSnapshotCapture, readiness preset, devicePixelRatio, browsers) are marked `N/A` in `matrix.yml` — there's no DOM in native App Percy; screenshots are taken on-device.
