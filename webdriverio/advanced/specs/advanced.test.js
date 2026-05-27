@@ -56,7 +56,10 @@ describe('Wikipedia App — App Percy Advanced', () => {
   })
 
   it('exercises sync mode', async () => {
-    await percyScreenshot('Wikipedia Home — sync', { sync: true })
+    // sync: true blocks until Percy returns the comparison result.
+    const result = await percyScreenshot('Wikipedia Home — sync', { sync: true })
+    console.log('Percy sync result:', JSON.stringify(result))
+    expect(result).toBeDefined()
   })
 
   it('exercises test_case + labels metadata', async () => {

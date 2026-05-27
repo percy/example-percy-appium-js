@@ -13,8 +13,8 @@ exports.config = {
 
   capabilities: [
     {
-      project: process.env.PERCY_PROJECT || 'Percy Appium App Advanced Example',
-      build: process.env.PERCY_BUILD || 'App Percy Advanced Wdio Android',
+      project: process.env.BROWSERSTACK_PROJECT_NAME || 'Percy Appium App Advanced Example',
+      build: process.env.BROWSERSTACK_BUILD_NAME || 'App Percy Advanced Wdio Android',
       name: 'advanced_visual_test',
       device: process.env.DEVICE || 'Google Pixel 6',
       os_version: process.env.OS_VERSION || '12.0',

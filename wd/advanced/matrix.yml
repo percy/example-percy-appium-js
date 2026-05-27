@@ -50,7 +50,7 @@ rows:
 
   - id: build_metadata_via_env
     state: covered
-    test: 'advanced.js capabilities driven by PERCY_PROJECT / PERCY_BUILD / DEVICE / OS_VERSION / APP'
+    test: 'advanced.js capabilities driven by BROWSERSTACK_PROJECT_NAME / BROWSERSTACK_BUILD_NAME / DEVICE / OS_VERSION / APP'
   - id: env_percy_branch
     state: covered
   - id: env_percy_commit

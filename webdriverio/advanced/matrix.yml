@@ -55,7 +55,7 @@ rows:
   # Set via bstack:options in advanced.conf.js capabilities.
   - id: build_metadata_via_env
     state: covered
-    test: 'advanced.conf.js capabilities.build / .project / .name driven by env (PERCY_PROJECT, PERCY_BUILD, DEVICE, OS_VERSION, APP)'
+    test: 'advanced.conf.js capabilities.build / .project / .name driven by env (BROWSERSTACK_PROJECT_NAME, BROWSERSTACK_BUILD_NAME, DEVICE, OS_VERSION, APP)'
   - id: env_percy_branch
     state: covered
     test: 'CI advanced job sets PERCY_BRANCH via env'

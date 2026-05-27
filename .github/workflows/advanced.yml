@@ -16,6 +16,9 @@ on:
           - webdriverio
           - wd
 
+permissions:
+  contents: read
+
 jobs:
   advanced:
     runs-on: ubuntu-latest
@@ -24,17 +27,24 @@ jobs:
       run:
         working-directory: ${{ inputs.driver }}/advanced
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Sanity-check BrowserStack secrets
+          node-version: 22
+      - name: Sanity-check required secrets
         env:
           AA_USERNAME: ${{ secrets.AA_USERNAME }}
           AA_ACCESS_KEY: ${{ secrets.AA_ACCESS_KEY }}
+          APP_BS_URL: ${{ secrets.APP_BS_URL }}
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         run: |
-          if [ -z "$AA_USERNAME" ] || [ -z "$AA_ACCESS_KEY" ]; then
-            echo "::error::AA_USERNAME / AA_ACCESS_KEY repo secrets are required for the advanced App Percy job. Cannot run without a real device session."
+          missing=()
+          [ -z "$AA_USERNAME" ]    && missing+=(AA_USERNAME)
+          [ -z "$AA_ACCESS_KEY" ]  && missing+=(AA_ACCESS_KEY)
+          [ -z "$APP_BS_URL" ]     && missing+=(APP_BS_URL)
+          [ -z "$PERCY_TOKEN" ]    && missing+=(PERCY_TOKEN)
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing required repo secrets: ${missing[*]}"
             exit 1
           fi
       - name: Install advanced/ dependencies

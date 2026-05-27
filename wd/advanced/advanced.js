@@ -12,8 +12,8 @@ const desiredCaps = {
   'bstack:options': {
     userName: process.env.AA_USERNAME,
     accessKey: process.env.AA_ACCESS_KEY,
-    projectName: process.env.PERCY_PROJECT || 'Percy Appium App Advanced (wd)',
-    buildName: process.env.PERCY_BUILD || 'App Percy Advanced wd Android',
+    projectName: process.env.BROWSERSTACK_PROJECT_NAME || 'Percy Appium App Advanced (wd)',
+    buildName: process.env.BROWSERSTACK_BUILD_NAME || 'App Percy Advanced wd Android',
   },
   percyOptions: { enabled: true, ignoreErrors: true },
   app: process.env.APP,
@@ -62,7 +62,10 @@ async function run() {
     })
 
     // 7. sync mode.
-    await percyScreenshot(driver, 'Wikipedia Home (wd) — sync', { sync: true })
+    // sync: true blocks until Percy returns the comparison result.
+    const result = await percyScreenshot(driver, 'Wikipedia Home (wd) — sync', { sync: true })
+    console.log('Percy sync result:', JSON.stringify(result))
+    if (!result) throw new Error('sync returned no result')
 
     // 8. test_case + labels.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — test_case + labels', {
