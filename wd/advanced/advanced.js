@@ -33,22 +33,30 @@ async function run() {
     // 1. Baseline screenshot — matrix row: baseline.
     await percyScreenshot(driver, 'Wikipedia Home (wd)')
 
-    // 2. device_name + orientation.
-    await percyScreenshot(driver, 'Wikipedia Home (wd) — landscape', {
-      device_name: process.env.DEVICE || 'Google Pixel 6',
-      orientation: 'landscape',
-    })
+    // 2. device_name + orientation. The `orientation` snapshot option is
+    // metadata only — physically rotate the device so the snapshot actually
+    // reflects landscape.
+    await driver.setOrientation('LANDSCAPE')
+    try {
+      await percyScreenshot(driver, 'Wikipedia Home (wd) — landscape', {
+        device_name: process.env.DEVICE || 'Google Pixel 6',
+        orientation: 'landscape',
+      })
+    } finally {
+      await driver.setOrientation('PORTRAIT')
+    }
 
-    // 3. fullscreen + status_bar_height + nav_bar_height.
+    // 3. fullscreen + status_bar_height + nav_bar_height. The SDK option key
+    // is `full_screen` (with underscore) — `fullscreen` is silently ignored.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — fullscreen', {
-      fullscreen: true,
+      full_screen: true,
       status_bar_height: 24,
       nav_bar_height: 0,
     })
 
     // 4. ignore_regions_xpaths.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — ignore via xpath', {
-      ignore_regions_xpaths: ['//android.widget.TextView[@text="Search Wikipedia"]'],
+      ignore_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
     })
 
     // 5. custom_ignore_regions.
@@ -58,7 +66,7 @@ async function run() {
 
     // 6. consider_regions_xpaths.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — consider via xpath', {
-      consider_regions_xpaths: ['//android.widget.TextView[@text="Search Wikipedia"]'],
+      consider_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
     })
 
     // 7. sync mode.

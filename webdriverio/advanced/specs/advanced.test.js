@@ -14,15 +14,24 @@ describe('Wikipedia App — App Percy Advanced', () => {
   })
 
   it('exercises device_name override + orientation', async () => {
-    await percyScreenshot('Wikipedia Home — landscape', {
-      device_name: process.env.DEVICE || 'Google Pixel 6',
-      orientation: 'landscape',
-    })
+    // The `orientation` snapshot option is metadata only — physically rotate
+    // the device so the snapshot actually reflects landscape.
+    await browser.setOrientation('LANDSCAPE')
+    try {
+      await percyScreenshot('Wikipedia Home — landscape', {
+        device_name: process.env.DEVICE || 'Google Pixel 6',
+        orientation: 'landscape',
+      })
+    } finally {
+      await browser.setOrientation('PORTRAIT')
+    }
   })
 
   it('exercises fullscreen + status_bar_height + nav_bar_height', async () => {
+    // The SDK option key is `full_screen` (with underscore) — `fullscreen`
+    // is silently ignored, which is why the snapshot looked like the baseline.
     await percyScreenshot('Wikipedia Home — fullscreen', {
-      fullscreen: true,
+      full_screen: true,
       status_bar_height: 24,
       nav_bar_height: 0,
     })
@@ -30,7 +39,7 @@ describe('Wikipedia App — App Percy Advanced', () => {
 
   it('exercises ignore regions via xpath', async () => {
     await percyScreenshot('Wikipedia Home — ignore via xpath', {
-      ignore_regions_xpaths: ['//android.widget.TextView[@text="Search Wikipedia"]'],
+      ignore_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
     })
   })
 
@@ -51,7 +60,7 @@ describe('Wikipedia App — App Percy Advanced', () => {
 
   it('exercises consider regions via xpath', async () => {
     await percyScreenshot('Wikipedia Home — consider via xpath', {
-      consider_regions_xpaths: ['//android.widget.TextView[@text="Search Wikipedia"]'],
+      consider_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
     })
   })
 
