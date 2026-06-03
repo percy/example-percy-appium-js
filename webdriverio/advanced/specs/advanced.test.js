@@ -39,7 +39,7 @@ describe('Wikipedia App — App Percy Advanced', () => {
 
   it('exercises ignore regions via xpath', async () => {
     await percyScreenshot('Wikipedia Home — ignore via xpath', {
-      ignore_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
+      ignore_regions_xpaths: ['//*[@resource-id="org.wikipedia.alpha:id/search_container"]'],
     })
   })
 
@@ -60,7 +60,7 @@ describe('Wikipedia App — App Percy Advanced', () => {
 
   it('exercises consider regions via xpath', async () => {
     await percyScreenshot('Wikipedia Home — consider via xpath', {
-      consider_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
+      consider_regions_xpaths: ['//*[@resource-id="org.wikipedia.alpha:id/search_container"]'],
     })
   })
 

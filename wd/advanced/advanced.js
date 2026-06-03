@@ -56,7 +56,7 @@ async function run() {
 
     // 4. ignore_regions_xpaths.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — ignore via xpath', {
-      ignore_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
+      ignore_regions_xpaths: ['//*[@resource-id="org.wikipedia.alpha:id/search_container"]'],
     })
 
     // 5. custom_ignore_regions.
@@ -66,14 +66,20 @@ async function run() {
 
     // 6. consider_regions_xpaths.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — consider via xpath', {
-      consider_regions_xpaths: ['//android.widget.ImageView[@content-desc="Wikipedia"]'],
+      consider_regions_xpaths: ['//*[@resource-id="org.wikipedia.alpha:id/search_container"]'],
     })
 
     // 7. sync mode.
-    // sync: true blocks until Percy returns the comparison result.
+    // sync: true blocks until Percy returns the comparison result. With a
+    // full-access PERCY_TOKEN that's the comparison payload; with a write-only
+    // token (the common CI setup) Percy responds 403 and the SDK returns the
+    // error payload instead. Both are valid, so only fail on a missing/non-object
+    // result rather than requiring real comparison data.
     const result = await percyScreenshot(driver, 'Wikipedia Home (wd) — sync', { sync: true })
     console.log('Percy sync result:', JSON.stringify(result))
-    if (!result) throw new Error('sync returned no result')
+    if (result !== null && typeof result !== 'object') {
+      throw new Error(`unexpected sync result: ${JSON.stringify(result)}`)
+    }
 
     // 8. test_case + labels.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — test_case + labels', {

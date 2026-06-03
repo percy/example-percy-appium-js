@@ -4,7 +4,7 @@ This directory exercises the full applicable Percy SDK feature surface for `@per
 
 ## What this example covers
 
-A single mocha spec (`specs/advanced.test.js`) where each `it(...)` block exercises one row of the [App Percy / Appium Native matrix](../../../../docs/advanced-example-feature-matrix.md):
+A single mocha spec (`specs/advanced.test.js`) where each `it(...)` block exercises one row of the App Percy / Appium Native matrix (source of truth: [`matrix.yml`](./matrix.yml)):
 
 - `device_name` override
 - `orientation` (portrait/landscape)
@@ -36,12 +36,9 @@ npx percy app:exec -- npm run test:advanced
 
 ## CI note
 
-Unlike Phase 1 (where `percy exec --testing` was deterministic), App Percy CI cannot run without a real device session. The shipped CI job either:
+App Percy CI cannot run without a real BrowserStack device session, and forks / Dependabot don't have access to the hub secrets. The shipped CI job therefore runs **manually only**, via `workflow_dispatch` — it does not run automatically on pushes or PRs. Trigger it from the Actions tab once `AA_USERNAME` and `AA_ACCESS_KEY` secrets are configured.
 
-- Skips on PRs that lack BrowserStack secrets (forks, Dependabot), and
-- Runs on pushes to `master` if `${{ secrets.AA_USERNAME }}` and `${{ secrets.AA_ACCESS_KEY }}` are populated in the repo.
-
-See the comment at the top of `.github/workflows/test.yml` for the exact gating.
+See the comment at the top of `.github/workflows/advanced.yml` for details.
 
 ## Coverage matrix
 
