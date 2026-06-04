@@ -9,6 +9,7 @@ A single mocha spec (`specs/advanced.test.js`) where each `it(...)` block exerci
 - `device_name` override
 - `orientation` (portrait/landscape)
 - `fullscreen` + `status_bar_height` + `nav_bar_height`
+- `fullPage` + `screenLengths` + `bottomScrollviewOffset` (full-page scroll capture — the offset scrolls past the sticky bottom nav)
 - `ignore_regions_xpaths`
 - `ignore_region_appium_elements`
 - `custom_ignore_regions` (bounding boxes)

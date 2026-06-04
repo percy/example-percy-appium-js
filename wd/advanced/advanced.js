@@ -54,6 +54,19 @@ async function run() {
       nav_bar_height: 0,
     })
 
+    // 3b. full-page (scroll-and-stitch) capture — App Automate only. The
+    // device's bottom navigation/system bar is sticky, so the scroll engine
+    // treats it as the end of the page and grabs a single tile. Ignoring the
+    // bottom `bottomScrollviewOffset` pixels lets the scroll advance past the
+    // fixed bar and stitch the real content. Verified on Pixel 6: without the
+    // offset = 1 tile, with offset = ~7 tiles. Default = Pixel 6 nav-bar
+    // height (160 device px); override via BOTTOM_SCROLLVIEW_OFFSET.
+    await percyScreenshot(driver, 'Wikipedia Home (wd) — fullpage', {
+      fullPage: true,
+      screenLengths: 4,
+      bottomScrollviewOffset: Number(process.env.BOTTOM_SCROLLVIEW_OFFSET || 160),
+    })
+
     // 4. ignore_regions_xpaths.
     await percyScreenshot(driver, 'Wikipedia Home (wd) — ignore via xpath', {
       ignore_regions_xpaths: ['//*[@resource-id="org.wikipedia.alpha:id/search_container"]'],

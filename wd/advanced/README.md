@@ -4,7 +4,7 @@ This directory exercises the full applicable Percy SDK feature surface for `@per
 
 ## What this example covers
 
-A single sequential Node script (`advanced.js`) that runs 8 `percyScreenshot` calls in order, one per applicable matrix row: device_name override + orientation, fullscreen + status_bar/nav_bar heights, ignore regions via xpath / custom bbox, consider regions via xpath, sync mode, test_case + labels.
+A single sequential Node script (`advanced.js`) that runs `percyScreenshot` calls in order, one per applicable matrix row: device_name override + orientation, fullscreen + status_bar/nav_bar heights, full-page scroll capture (`fullPage` + `screenLengths` + `bottomScrollviewOffset` to scroll past the sticky bottom nav), ignore regions via xpath / custom bbox, consider regions via xpath, sync mode, test_case + labels.
 
 `ignore_region_appium_elements` is `Planned` — needs a wd-style promise chain over `driver.elementByAccessibilityId(...)` before passing to `percyScreenshot`.
 

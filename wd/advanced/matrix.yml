@@ -25,6 +25,15 @@ rows:
   - id: nav_bar_height
     state: covered
     test: 'advanced.js: percyScreenshot with fullscreen + status_bar_height + nav_bar_height'
+  - id: fullpage
+    state: covered
+    test: 'advanced.js: percyScreenshot with fullPage + screenLengths + bottomScrollviewOffset'
+  - id: screen_lengths
+    state: covered
+    test: 'advanced.js: percyScreenshot with fullPage + screenLengths + bottomScrollviewOffset'
+  - id: bottom_scrollview_offset
+    state: covered
+    test: 'advanced.js: percyScreenshot with fullPage + screenLengths + bottomScrollviewOffset'
   - id: ignore_regions_xpaths
     state: covered
     test: 'advanced.js: percyScreenshot with ignore_regions_xpaths'

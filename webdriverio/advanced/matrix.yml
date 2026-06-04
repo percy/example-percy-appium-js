@@ -30,6 +30,15 @@ rows:
   - id: nav_bar_height
     state: covered
     test: 'Wikipedia App — App Percy Advanced > exercises fullscreen + status_bar_height + nav_bar_height'
+  - id: fullpage
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises full-page scroll capture with bottom scroll offset'
+  - id: screen_lengths
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises full-page scroll capture with bottom scroll offset'
+  - id: bottom_scrollview_offset
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises full-page scroll capture with bottom scroll offset'
   - id: ignore_regions_xpaths
     state: covered
     test: 'Wikipedia App — App Percy Advanced > exercises ignore regions via xpath'
