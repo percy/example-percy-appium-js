@@ -54,14 +54,10 @@ driver.init(desiredCaps)
   // .then(function() {
   //   return percyScreenshot(driver, 'History tab');
   // })
-  .then(function () {
-    return driver.waitForElementByAccessibilityId('My lists', asserters.isDisplayed && asserters.isEnabled, 50000);
-  })
-  .then(function (searchElement) {
-    return searchElement.click();
-  })
   .then(function() {
-    return percyScreenshot(driver, 'Lists tab');
+    // Smoke test: capture the home screen once the app has loaded.
+    // (Previously waited for a 'My lists' element that no longer exists in the sample app.)
+    return percyScreenshot(driver, 'App Percy Smoke - Home');
   })
   .fin(function() {
     // Invoke driver.quit() after the test is done to indicate that the test is completed.
