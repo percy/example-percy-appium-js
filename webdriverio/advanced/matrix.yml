@@ -1,0 +1,123 @@
+# PER-8195 Phase 2 — Appium-JS (webdriverio driver) matrix-row mapping.
+# Test code: specs/advanced.test.js (mocha via @wdio).
+#
+# App Percy is fundamentally different from web Percy:
+# - Screenshots are taken on-device via `driver.takeScreenshot()`.
+# - SDK posts to /percy/comparison (per-screenshot upload), not /percy/snapshot.
+# - DOM-only options (widths, percyCSS, scope, domTransformation, discovery,
+#   responsiveSnapshotCapture, regions{web-shape}) don't apply.
+
+sdk: appium-js
+driver: webdriverio
+package: '@percy/appium-app'
+language: javascript
+sdk_min_version: '2.1.0'
+cli_min_version: '1.31.13'
+
+rows:
+  - id: device_name_override
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises device_name override + orientation'
+  - id: orientation_handling
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises device_name override + orientation'
+  - id: fullscreen
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises fullscreen + status_bar_height + nav_bar_height'
+  - id: status_bar_height
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises fullscreen + status_bar_height + nav_bar_height'
+  - id: nav_bar_height
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises fullscreen + status_bar_height + nav_bar_height'
+  - id: fullpage
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises full-page scroll capture with bottom scroll offset'
+  - id: screen_lengths
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises full-page scroll capture with bottom scroll offset'
+  - id: bottom_scrollview_offset
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises full-page scroll capture with bottom scroll offset'
+  - id: ignore_regions_xpaths
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises ignore regions via xpath'
+  - id: ignore_region_appium_elements
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises ignore regions via appium elements'
+  - id: custom_ignore_regions
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises ignore regions via custom bounding boxes'
+  - id: consider_regions_xpaths
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises consider regions via xpath'
+  - id: sync
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises sync mode'
+  - id: test_case
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises test_case + labels metadata'
+  - id: labels
+    state: covered
+    test: 'Wikipedia App — App Percy Advanced > exercises test_case + labels metadata'
+
+  # Set via bstack:options in advanced.conf.js capabilities.
+  - id: build_metadata_via_env
+    state: covered
+    test: 'advanced.conf.js capabilities.build / .project / .name driven by env (BROWSERSTACK_PROJECT_NAME, BROWSERSTACK_BUILD_NAME, DEVICE, OS_VERSION, APP)'
+  - id: env_percy_branch
+    state: covered
+    test: 'CI advanced job sets PERCY_BRANCH via env'
+  - id: env_percy_commit
+    state: covered
+    test: 'CI advanced job sets PERCY_COMMIT via env'
+
+  # Browser/web-specific — not applicable to native App Percy.
+  - id: widths
+    state: n_a
+    reason: 'App Percy captures full-device screenshots; widths is a web DOM concept.'
+  - id: percy_css
+    state: n_a
+    reason: 'No DOM in native App Percy; CSS overrides do not apply.'
+  - id: min_height
+    state: n_a
+    reason: 'No DOM in native App Percy.'
+  - id: enable_javascript
+    state: n_a
+    reason: 'No DOM in native App Percy.'
+  - id: scope
+    state: n_a
+    reason: 'No DOM in native App Percy.'
+  - id: discovery
+    state: n_a
+    reason: 'No DOM in native App Percy; asset discovery does not apply.'
+  - id: dom_transformation
+    state: n_a
+    reason: 'No DOM in native App Percy.'
+  - id: responsive_snapshot_capture
+    state: n_a
+    reason: 'No DOM in native App Percy.'
+  - id: readiness_preset
+    state: n_a
+    reason: 'Not applicable; native screenshots take after explicit driver.pause + waitForDisplayed.'
+  - id: device_pixel_ratio
+    state: n_a
+    reason: 'Device DPR is captured implicitly from the on-device screenshot.'
+  - id: browsers
+    state: n_a
+    reason: 'App Percy targets devices, not browsers.'
+
+  # Planned for follow-up.
+  - id: ignore_region_browserstack_locators
+    state: planned
+    test: 'BrowserStack-specific locator-based ignore region (CLI ≥ 1.31.13)'
+  - id: consider_region_appium_elements
+    state: planned
+  - id: consider_region_browserstack_locators
+    state: planned
+  - id: percy_yml_global_config
+    state: covered
+    test: 'global config consumed via .percy.yml'
+  - id: environment_info_reporting
+    state: covered
+    test: 'automatic via @percy/appium-app client info'
