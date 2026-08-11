@@ -15,6 +15,14 @@ on:
         options:
           - webdriverio
           - wd
+      platform:
+        description: 'Which platform to run against (android or ios)'
+        required: true
+        default: 'android'
+        type: choice
+        options:
+          - android
+          - ios
 
 permissions:
   contents: read
@@ -31,30 +39,37 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      # The App Automate app differs per platform: APP_BS_URL is the Android
+      # build, APP_BS_URL_IOS is the iOS build. Device/os defaults are resolved
+      # per-platform inside the advanced config via the PLATFORM env var.
       - name: Sanity-check required secrets
         env:
           AA_USERNAME: ${{ secrets.AA_USERNAME }}
           AA_ACCESS_KEY: ${{ secrets.AA_ACCESS_KEY }}
-          APP_BS_URL: ${{ secrets.APP_BS_URL }}
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PLATFORM: ${{ inputs.platform }}
+          APP: ${{ inputs.platform == 'ios' && secrets.APP_BS_URL_IOS || secrets.APP_BS_URL }}
+          APP_SECRET_NAME: ${{ inputs.platform == 'ios' && 'APP_BS_URL_IOS' || 'APP_BS_URL' }}
         run: |
           missing=()
           [ -z "$AA_USERNAME" ]    && missing+=(AA_USERNAME)
           [ -z "$AA_ACCESS_KEY" ]  && missing+=(AA_ACCESS_KEY)
-          [ -z "$APP_BS_URL" ]     && missing+=(APP_BS_URL)
           [ -z "$PERCY_TOKEN" ]    && missing+=(PERCY_TOKEN)
+          [ -z "$APP" ]            && missing+=("$APP_SECRET_NAME")
           if [ ${#missing[@]} -gt 0 ]; then
-            echo "::error::Missing required repo secrets: ${missing[*]}"
+            echo "::error::Missing required repo secrets for platform '${PLATFORM}': ${missing[*]}"
             exit 1
           fi
       - name: Install advanced/ dependencies
         run: npm install
-      - name: Run wdio advanced tests against BrowserStack App Automate
+      - name: Run ${{ inputs.driver }} advanced tests against BrowserStack App Automate (${{ inputs.platform }})
         env:
           AA_USERNAME: ${{ secrets.AA_USERNAME }}
           AA_ACCESS_KEY: ${{ secrets.AA_ACCESS_KEY }}
-          APP: ${{ secrets.APP_BS_URL }}
+          # iOS uses APP_BS_URL_IOS, Android uses APP_BS_URL.
+          APP: ${{ inputs.platform == 'ios' && secrets.APP_BS_URL_IOS || secrets.APP_BS_URL }}
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PLATFORM: ${{ inputs.platform }}
           PERCY_BRANCH: ${{ github.ref_name }}
           PERCY_COMMIT: ${{ github.sha }}
         run: npx --no-install percy app:exec -- npm run test:advanced

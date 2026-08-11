@@ -8,17 +8,22 @@
 const percyScreenshot = require('@percy/appium-app')
 const wd = require('wd')
 
+// PLATFORM selects the device/os defaults (android | ios). The CI workflow
+// sets it and supplies the matching APP (Android: APP_BS_URL, iOS:
+// APP_BS_URL_IOS). DEVICE / OS_VERSION env vars still override per-run.
+const isIOS = (process.env.PLATFORM || 'android').toLowerCase() === 'ios'
+
 const desiredCaps = {
   'bstack:options': {
     userName: process.env.AA_USERNAME,
     accessKey: process.env.AA_ACCESS_KEY,
     projectName: process.env.BROWSERSTACK_PROJECT_NAME || 'Percy Appium App Advanced (wd)',
-    buildName: process.env.BROWSERSTACK_BUILD_NAME || 'App Percy Advanced wd Android',
+    buildName: process.env.BROWSERSTACK_BUILD_NAME || `App Percy Advanced wd ${isIOS ? 'iOS' : 'Android'}`,
   },
   percyOptions: { enabled: true, ignoreErrors: true },
   app: process.env.APP,
-  device: process.env.DEVICE || 'Google Pixel 6',
-  os_version: process.env.OS_VERSION || '12',
+  device: process.env.DEVICE || (isIOS ? 'iPhone 15' : 'Google Pixel 6'),
+  os_version: process.env.OS_VERSION || (isIOS ? '17' : '12'),
   project: 'First Node App Percy Project',
   build: 'App Percy Advanced wd',
   name: 'advanced_visual_test',
