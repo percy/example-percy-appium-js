@@ -9,12 +9,16 @@ exports.config = {
   exclude: [],
 
   capabilities: [{
-    project: "First App Percy Project",
-    build: 'App Percy Webdriverio Android',
-    name: 'first_visual_test',
-    device: 'Samsung Galaxy S21 Ultra',
-    os_version: "11.0",
-    app: process.env.APP_URL || 'bs://<hashed app-id>'
+    platformName: 'Android',
+    'appium:app': process.env.APP_URL || 'bs://<hashed app-id>',
+    'bstack:options': {
+      deviceName: 'Samsung Galaxy S21 Ultra',
+      osVersion: "11.0",
+      appiumVersion: process.env.APPIUM_VERSION || '2.19.0',
+      projectName: "First App Percy Project",
+      buildName: 'App Percy Webdriverio Android',
+      sessionName: 'first_visual_test'
+    }
   }],
 
   logLevel: 'info',
