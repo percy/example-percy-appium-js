@@ -11,6 +11,7 @@ var asserters = wd.asserters;
 const desiredCaps = {
   // Set BStack options that would allow App Automate to run
   'bstack:options': {
+    appiumVersion: process.env.APPIUM_VERSION || '2.19.0',
     userName: process.env.BROWSERSTACK_USERNAME,
     accessKey: process.env.BROWSERSTACK_ACCESS_KEY
   },

@@ -9,12 +9,16 @@ exports.config = {
   exclude: [],
 
   capabilities: [{
-    project: "First App Percy Project",
-    build: 'App Percy Webdriverio iOS',
-    name: 'first_visual_test',
-    device: 'iPhone 13 Mini',
-    os_version: "15",
-    app: process.env.APP_URL
+    platformName: 'iOS',
+    'appium:app': process.env.APP_URL,
+    'bstack:options': {
+      deviceName: 'iPhone 13',
+      osVersion: "15",
+      appiumVersion: process.env.APPIUM_VERSION || '2.19.0',
+      projectName: "First App Percy Project",
+      buildName: 'App Percy Webdriverio iOS',
+      sessionName: 'first_visual_test'
+    }
   }],
 
   logLevel: 'info',
