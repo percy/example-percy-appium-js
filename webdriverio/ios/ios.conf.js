@@ -9,12 +9,16 @@ exports.config = {
   exclude: [],
 
   capabilities: [{
-    project: "First App Percy Project",
-    build: 'App Percy Webdriverio iOS',
-    name: 'first_visual_test',
-    device: 'iPhone 12 Pro',
-    os_version: "17",
-    app: process.env.APP || 'bs://<hashed app-id>'
+    platformName: 'iOS',
+    'appium:app': process.env.APP || 'bs://<hashed app-id>',
+    'bstack:options': {
+      deviceName: 'iPhone 12 Pro',
+      osVersion: "17",
+      appiumVersion: process.env.APPIUM_VERSION || '2.19.0',
+      projectName: "First App Percy Project",
+      buildName: 'App Percy Webdriverio iOS',
+      sessionName: 'first_visual_test'
+    }
   }],
 
   logLevel: 'info',

@@ -9,12 +9,16 @@ exports.config = {
   exclude: [],
 
   capabilities: [{
-    project: "First App Percy Project",
-    build: 'App Percy Webdriverio Android',
-    name: 'first_visual_test',
-    device: 'Google Pixel 6',
-    os_version: "12.0",
-    app: process.env.APP || 'bs://<hashed app-id>'
+    platformName: 'Android',
+    'appium:app': process.env.APP || 'bs://<hashed app-id>',
+    'bstack:options': {
+      deviceName: 'Google Pixel 6',
+      osVersion: "12.0",
+      appiumVersion: process.env.APPIUM_VERSION || '2.19.0',
+      projectName: "First App Percy Project",
+      buildName: 'App Percy Webdriverio Android',
+      sessionName: 'first_visual_test'
+    }
   }],
 
   logLevel: 'info',
